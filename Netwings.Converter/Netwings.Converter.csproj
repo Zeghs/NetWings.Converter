@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BCE0F729-28EF-4598-804C-A0F6CE636398}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Converter</RootNamespace>
+    <AssemblyName>Netwings.Converter</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\ZERO_System\log4net\4.0\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Mitake.QuoteService, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>bin\Release\plugins\quotes\Mitake.QuoteService.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\ZERO_System\json.net\4.0\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PLTypes">
+      <HintPath>..\..\ZERO_System\PLTypes\bin\Release\PLTypes.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="WES.External.QuotePlugin">
+      <HintPath>..\..\ZERO_System\WES.External.QuotePlugin\bin\Release\WES.External.QuotePlugin.dll</HintPath>
+    </Reference>
+    <Reference Include="WES.Runtime.Product">
+      <HintPath>..\..\ZERO_System\WES.Runtime.Product\bin\Release\WES.Runtime.Product.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Zeghs\Data\ConvertParameter.cs" />
+    <Compile Include="Zeghs\Data\Series.cs" />
+    <Compile Include="Zeghs\Data\SeriesIndexer.cs" />
+    <Compile Include="Zeghs\Data\SeriesSymbolData.cs" />
+    <Compile Include="Zeghs\Data\Tick.cs" />
+    <Compile Include="Zeghs\IO\FuturesCsvAdapter.cs" />
+    <Compile Include="Zeghs\IO\FileAdapter.cs" />
+    <Compile Include="Zeghs\IO\MitakeSourceAdapter.cs" />
+    <Compile Include="Zeghs\Settings\GlobalSettings.cs" />
+    <Compile Include="Zeghs\Utils\Compression.cs" />
+    <Compile Include="Zeghs\Utils\DateTimeParser.cs" />
+    <Compile Include="Zeghs\IO\FuturesRptAdapter.cs" />
+    <Compile Include="Zeghs\Utils\DumpDataUtil.cs" />
+    <Compile Include="Zeghs\Utils\EncodeUtil.cs" />
+    <Compile Include="Zeghs\Utils\FileSearchUtil.cs" />
+    <Compile Include="Zeghs\Utils\ZBuffer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
