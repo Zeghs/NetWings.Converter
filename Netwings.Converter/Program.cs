@@ -13,6 +13,7 @@ using Zeghs.Products;
 using Zeghs.Services;
 using Zeghs.Managers;
 using Zeghs.Informations;
+using System.IO;
 
 namespace Converter {
 	class Program {
@@ -26,13 +27,6 @@ namespace Converter {
 			ProductManager.Load("exchanges");
 			QuoteManager.Manager.Refresh("plugins\\quotes");
 
-			if (args.Length > 0 && args[0].Equals("/admin")) {
-			        int iCommand = PrintMenu();
-			        if (iCommand > 0) {
-			                ExcuteCommand(iCommand);
-			        }
-			}
-
 			QuoteServiceInformation[] cQuoteServiceInfos = QuoteManager.Manager.GetQuoteServiceInformations();
 			QuoteManager.Manager.StartQuoteService(cQuoteServiceInfos[0]);
 			AbstractQuoteService cService = QuoteManager.Manager.GetQuoteService(cQuoteServiceInfos[0].DataSource);
@@ -40,6 +34,15 @@ namespace Converter {
 			cService.onLoginCompleted += Service_onLoginCompleted;
 			
 			Zeghs.Settings.GlobalSettings.Load();
+
+			if (args.Length > 0 && args[0].Equals("/admin")) {
+				int iCommand = PrintMenu();
+				if (iCommand > 0) {
+					ExcuteCommand(iCommand);
+				}
+			} else {
+				FuturesRptAdapter.Convert(DateTime.Now);
+			}
 
 			//DumpDataUtil.Load("TXW0C8250.tw", false, new DateTime(2012, 1, 2, 8, 45, 0), new DateTime(2014, 12, 31, 13, 45, 0));
 			//DumpDataUtil.Save("TXF0.tw", true, "abc.txt", new DateTime(2013,11,20,8,45,0));
@@ -64,8 +67,6 @@ namespace Converter {
 			//System.Console.ReadLine();
 			//return;
 
-			FuturesRptAdapter.Convert(DateTime.Now);
-
 			__cManualEvent.Dispose();
 			QuoteManager.Manager.CloseAll();
 		}
@@ -74,6 +75,9 @@ namespace Converter {
 			switch (command) {
 				case 1:
 					RunCommand_01();
+					break;
+				case 2:
+					RunCommand_02();
 					break;
 			}
 		}
@@ -89,9 +93,14 @@ namespace Converter {
 			ConvertParameter.自訂期權合約月份 = iMonth;
 		}
 
+		static void RunCommand_02() {
+			FuturesRptAdapter.Convert(DateTime.Now, false);
+		}
+
 		static int PrintMenu() {
 			Console.WriteLine("== [管理者功能選單]");
 			Console.WriteLine("1. 修改期權商品到期日為今天");
+			Console.WriteLine("2. 匯入今日RPT壓縮檔並轉檔資料");
 			Console.WriteLine();
 			Console.Write("請輸入選單號碼:");
 			string sNumber = Console.ReadLine();

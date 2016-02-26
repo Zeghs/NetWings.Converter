@@ -23,8 +23,8 @@ namespace Zeghs.IO {
 			{ "TF", "FXF0.tw" }
 		};
 
-		internal static void Convert(DateTime date) {
-			string[] sData = LoadRPT(date);
+		internal static void Convert(DateTime date, bool isDownload = true) {
+			string[] sData = LoadRPT(date, isDownload);
 			if (sData == null) {
 				return;
 			}
@@ -109,18 +109,21 @@ namespace Zeghs.IO {
 			return cSeries;
 		}
 
-		private static string[] LoadRPT(DateTime date) {
+		private static string[] LoadRPT(DateTime date, bool isDownload = true) {
 			string sDaily = string.Format("Daily_{0}_{1}_{2}", date.Year, date.Month.ToString("0#"), date.Day.ToString("0#"));
-			using (WebClient cClient = new WebClient()) {
-				string sUrl = string.Format("http://www.taifex.com.tw/DailyDownload/{0}.zip", sDaily);
-				try {
-					cClient.DownloadFile(sUrl, sDaily + ".zip");
-				} catch (Exception __errExcep) {
-					if (File.Exists(sDaily + ".zip")) {
-						File.Delete(sDaily + ".zip");
+			if (isDownload) {
+				using (WebClient cClient = new WebClient()) {
+					string sUrl = string.Format("http://www.taifex.com.tw/DailyDownload/{0}.zip", sDaily);
+					try {
+						cClient.DownloadFile(sUrl, sDaily + ".zip");
+					} catch (Exception __errExcep) {
+						if (File.Exists(sDaily + ".zip")) {
+							File.Delete(sDaily + ".zip");
+						}
+						if (logger.IsErrorEnabled)
+							logger.ErrorFormat("{0}/r/n{1}", __errExcep.Message, __errExcep.StackTrace);
+						return null;
 					}
-					if (logger.IsErrorEnabled) logger.ErrorFormat("{0}/r/n{1}", __errExcep.Message, __errExcep.StackTrace);
-					return null;
 				}
 			}
 
