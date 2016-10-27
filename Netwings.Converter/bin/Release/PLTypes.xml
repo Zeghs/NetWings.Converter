@@ -693,19 +693,19 @@
               圖表屬性類別
             </summary>
         </member>
+        <member name="P:Zeghs.Settings.ChartProperty.AxisFont">
+            <summary>
+              [取得/設定] 座標軸預設字型
+            </summary>
+        </member>
         <member name="P:Zeghs.Settings.ChartProperty.BackgroundColor">
             <summary>
               [取得/設定] 背景顏色
             </summary>
         </member>
-        <member name="P:Zeghs.Settings.ChartProperty.FontName">
+        <member name="P:Zeghs.Settings.ChartProperty.ChartSettings">
             <summary>
-              [取得/設定] 預設字體名稱
-            </summary>
-        </member>
-        <member name="P:Zeghs.Settings.ChartProperty.FontSize">
-            <summary>
-              [取得/設定] 預設字體大小
+              [取得/設定] Chart 設定值
             </summary>
         </member>
         <member name="P:Zeghs.Settings.ChartProperty.ForeColor">
@@ -721,6 +721,11 @@
         <member name="P:Zeghs.Settings.ChartProperty.IsShowGrid">
             <summary>
               [取得/設定] 是否顯示網格
+            </summary>
+        </member>
+        <member name="P:Zeghs.Settings.ChartProperty.TextFont">
+            <summary>
+              [取得/設定] 使用者輸入文字預設字型
             </summary>
         </member>
         <member name="T:PowerLanguage.SeriesAbstract`1">
@@ -2314,11 +2319,13 @@
             <param name="dataStream">資料串流編號</param>
             <returns>返回值: ITextObject 介面</returns>
         </member>
-        <member name="M:PowerLanguage.ITextContainer.GetTextObjects(PowerLanguage.EDrawingSource)">
+        <member name="M:PowerLanguage.ITextContainer.GetTextObjects(PowerLanguage.EDrawingSource,System.Int32,System.Int32)">
             <summary>
               取得文字繪圖物件列表
             </summary>
             <param name="drawingSource">繪製描述來源列舉</param>
+            <param name="index">起始 Bar Number(預設: 1)</param>
+            <param name="count">取得個數(0=全部)</param>
             <returns>返回值: 文字繪圖物件列表(需要使用 foreach 列舉所有文字繪圖物件)</returns>
         </member>
         <member name="P:PowerLanguage.ITextContainer.Active">

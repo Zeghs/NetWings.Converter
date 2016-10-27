@@ -41,6 +41,8 @@ namespace Converter {
 					ExcuteCommand(iCommand);
 				}
 			} else {
+				bool bEvent = __cManualEvent.WaitOne(60000);
+
 				FuturesRptAdapter.Convert(DateTime.Now);
 			}
 
