@@ -1,7 +1,0 @@
-D:\project\Netwings.Converter\Converter\bin\Debug\Converter.exe.config
-D:\project\Netwings.Converter\Converter\obj\x86\Debug\ResolveAssemblyReference.cache
-D:\project\Netwings.Converter\Converter\bin\Debug\Converter.exe
-D:\project\Netwings.Converter\Converter\bin\Debug\Converter.pdb
-D:\project\Netwings.Converter\Converter\bin\Debug\ICSharpCode.SharpZipLib.dll
-D:\project\Netwings.Converter\Converter\obj\x86\Debug\Converter.exe
-D:\project\Netwings.Converter\Converter\obj\x86\Debug\Converter.pdb
