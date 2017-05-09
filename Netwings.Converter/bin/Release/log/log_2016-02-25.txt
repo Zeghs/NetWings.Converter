@@ -1,0 +1,114 @@
+﻿2016/02/25 09:37:41 [INFO ] QuoteService:Login(0)
+[QuoteService.Login] Login signer service... service=61.218.226.231(5024), userId=zeghs
+
+2016/02/25 09:37:41 [INFO ] QuoteService:Login(0)
+[QuoteService.Login] Register service... service=61.218.226.231(4506), userId=zeghs, sessionKey:00000000000000001164
+
+2016/02/25 09:39:03 [INFO ] QuoteService:Login(0)
+[QuoteService.Login] Login signer service... service=61.218.226.231(5024), userId=zeghs
+
+2016/02/25 09:39:03 [INFO ] QuoteService:Login(0)
+[QuoteService.Login] Register service... service=61.218.226.231(4506), userId=zeghs, sessionKey:00000000000000001165
+
+2016/02/25 09:39:04 [INFO ] FuturesRptAdapter:LoadRPT(130)
+[Download] @Daily_2016_02_25.zip download completed...
+
+2016/02/25 09:39:04 [INFO ] FuturesRptAdapter:LoadRPT(134)
+[Extract] @Daily_2016_02_25.rpt extract completed...
+
+2016/02/25 09:39:05 [INFO ] FuturesRptAdapter:Convert(40)
+[Convert] 開始轉換期交所的期貨資訊...
+
+2016/02/25 09:39:05 [INFO ] FileAdapter:Write(165)
+[FileWrite] data\mins\MXF0.tw write completed...  count=300
+
+2016/02/25 09:39:05 [INFO ] FileAdapter:Write(165)
+[FileWrite] data\days\MXF0.tw write completed...  count=1
+
+2016/02/25 09:39:05 [INFO ] FileAdapter:Write(165)
+[FileWrite] data\mins\EXF0.tw write completed...  count=288
+
+2016/02/25 09:39:05 [INFO ] FileAdapter:Write(165)
+[FileWrite] data\days\EXF0.tw write completed...  count=1
+
+2016/02/25 09:39:05 [INFO ] FileAdapter:Write(165)
+[FileWrite] data\mins\FXF0.tw write completed...  count=291
+
+2016/02/25 09:39:05 [INFO ] FileAdapter:Write(165)
+[FileWrite] data\days\FXF0.tw write completed...  count=1
+
+2016/02/25 09:39:06 [INFO ] FileAdapter:Write(165)
+[FileWrite] data\mins\TXF0.tw write completed...  count=300
+
+2016/02/25 09:39:06 [INFO ] FileAdapter:Write(165)
+[FileWrite] data\days\TXF0.tw write completed...  count=1
+
+2016/02/25 09:39:06 [INFO ] QuoteService:Logout(0)
+[QuoteService.Logout] Service logout success...
+
+2016/02/25 09:39:19 [INFO ] QuoteService:Login(0)
+[QuoteService.Login] Login signer service... service=61.218.226.231(5024), userId=zeghs
+
+2016/02/25 09:39:19 [INFO ] QuoteService:Login(0)
+[QuoteService.Login] Register service... service=61.218.226.231(4506), userId=zeghs, sessionKey:00000000000000001166
+
+2016/02/25 09:39:20 [INFO ] FuturesRptAdapter:LoadRPT(130)
+[Download] @Daily_2016_02_25.zip download completed...
+
+2016/02/25 09:39:20 [INFO ] FuturesRptAdapter:LoadRPT(134)
+[Extract] @Daily_2016_02_25.rpt extract completed...
+
+2016/02/25 09:39:20 [INFO ] FuturesRptAdapter:Convert(40)
+[Convert] 開始轉換期交所的期貨資訊...
+
+2016/02/25 09:39:21 [INFO ] FileAdapter:Write(165)
+[FileWrite] data\mins\MXF0.tw write completed...  count=300
+
+2016/02/25 09:39:21 [INFO ] FileAdapter:Write(165)
+[FileWrite] data\days\MXF0.tw write completed...  count=1
+
+2016/02/25 09:39:21 [INFO ] FileAdapter:Write(165)
+[FileWrite] data\mins\EXF0.tw write completed...  count=288
+
+2016/02/25 09:39:21 [INFO ] FileAdapter:Write(165)
+[FileWrite] data\days\EXF0.tw write completed...  count=1
+
+2016/02/25 09:39:21 [INFO ] FileAdapter:Write(165)
+[FileWrite] data\mins\FXF0.tw write completed...  count=291
+
+2016/02/25 09:39:21 [INFO ] FileAdapter:Write(165)
+[FileWrite] data\days\FXF0.tw write completed...  count=1
+
+2016/02/25 09:39:22 [INFO ] FileAdapter:Write(165)
+[FileWrite] data\mins\TXF0.tw write completed...  count=300
+
+2016/02/25 09:39:22 [INFO ] FileAdapter:Write(165)
+[FileWrite] data\days\TXF0.tw write completed...  count=1
+
+2016/02/25 09:39:22 [INFO ] QuoteService:Logout(0)
+[QuoteService.Logout] Service logout success...
+
+2016/02/25 09:39:47 [INFO ] QuoteService:Login(0)
+[QuoteService.Login] Login signer service... service=61.218.226.231(5024), userId=zeghs
+
+2016/02/25 09:39:47 [INFO ] QuoteService:Login(0)
+[QuoteService.Login] Register service... service=61.218.226.231(4506), userId=zeghs, sessionKey:00000000000000001167
+
+2016/02/25 09:40:10 [INFO ] QuoteService:Login(0)
+[QuoteService.Login] Login signer service... service=61.218.226.231(5024), userId=zeghs
+
+2016/02/25 09:40:10 [INFO ] QuoteService:Login(0)
+[QuoteService.Login] Register service... service=61.218.226.231(4506), userId=zeghs, sessionKey:00000000000000001168
+
+2016/02/25 09:40:11 [INFO ] FuturesRptAdapter:LoadRPT(132)
+[Download] @Daily_2016_02_25.zip download completed...
+
+2016/02/25 09:41:30 [INFO ] QuoteService:Login(0)
+[QuoteService.Login] Login signer service... service=61.218.226.231(5024), userId=zeghs
+
+2016/02/25 09:41:30 [INFO ] QuoteService:Login(0)
+[QuoteService.Login] Register service... service=61.218.226.231(4506), userId=zeghs, sessionKey:00000000000000001169
+
+2016/02/25 09:41:35 [INFO ] FuturesRptAdapter:LoadRPT(132)
+[Download] @Daily_2016_02_25.zip download completed...
+

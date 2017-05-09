@@ -237,6 +237,11 @@
               收盤線圖表
             </summary>
         </member>
+        <member name="F:PowerLanguage.EChartType.TextObject">
+            <summary>
+              文字物件
+            </summary>
+        </member>
         <member name="T:PowerLanguage.EResolution">
             <summary>
               資料週期定義
@@ -367,12 +372,25 @@
               圖表畫筆樣式
             </summary>
         </member>
+        <member name="M:PowerLanguage.PenStyle.#ctor">
+            <summary>
+              建構子
+            </summary>
+        </member>
         <member name="M:PowerLanguage.PenStyle.#ctor(System.Drawing.Color,System.Int32)">
             <summary>
               建構子
             </summary>
             <param name="color">畫筆顏色</param>
             <param name="width">畫筆寬度</param>
+        </member>
+        <member name="M:PowerLanguage.PenStyle.#ctor(System.Drawing.Color,System.Int32,System.Int32)">
+            <summary>
+              建構子
+            </summary>
+            <param name="color">畫筆顏色</param>
+            <param name="width">畫筆寬度</param>
+            <param name="pattern">筆刷樣式</param>
         </member>
         <member name="P:PowerLanguage.PenStyle.Color">
             <summary>
@@ -467,6 +485,11 @@
         <member name="P:PowerLanguage.ITextObject.Size">
             <summary>
               [取得/設定] 繪製文字的字型大小
+            </summary>
+        </member>
+        <member name="P:PowerLanguage.ITextObject.Style">
+            <summary>
+              [取得] 文字樣式資訊
             </summary>
         </member>
         <member name="P:PowerLanguage.ITextObject.Text">
@@ -693,6 +716,11 @@
               圖表屬性類別
             </summary>
         </member>
+        <member name="P:Zeghs.Settings.ChartProperty.AxisColor">
+            <summary>
+              [取得/設定] Axis 顏色
+            </summary>
+        </member>
         <member name="P:Zeghs.Settings.ChartProperty.AxisFont">
             <summary>
               [取得/設定] 座標軸預設字型
@@ -706,6 +734,11 @@
         <member name="P:Zeghs.Settings.ChartProperty.ChartSettings">
             <summary>
               [取得/設定] Chart 設定值
+            </summary>
+        </member>
+        <member name="P:Zeghs.Settings.ChartProperty.DrawingSource">
+            <summary>
+              [取得/設定] 繪製來源狀態
             </summary>
         </member>
         <member name="P:Zeghs.Settings.ChartProperty.ForeColor">
@@ -723,9 +756,19 @@
               [取得/設定] 是否顯示網格
             </summary>
         </member>
+        <member name="P:Zeghs.Settings.ChartProperty.LegendFont">
+            <summary>
+              [取得/設定] 圖例標籤預設字型
+            </summary>
+        </member>
         <member name="P:Zeghs.Settings.ChartProperty.TextFont">
             <summary>
               [取得/設定] 使用者輸入文字預設字型
+            </summary>
+        </member>
+        <member name="P:Zeghs.Settings.ChartProperty.TitleFont">
+            <summary>
+              [取得/設定] Title 預設字型(標頭顯示商品名稱資訊)
             </summary>
         </member>
         <member name="T:PowerLanguage.SeriesAbstract`1">
@@ -1676,6 +1719,11 @@
               [取得/設定] 座標範圍
             </summary>
         </member>
+        <member name="P:PowerLanguage.AxisSetting.IsCreateInstance">
+            <summary>
+              [取得/設定] 是否建立新的 Axis 座標軸(true=建立新 axis 座標軸, false=共用主要 Axis 當作座標軸參考)
+            </summary>
+        </member>
         <member name="P:PowerLanguage.AxisSetting.MarginBottom">
             <summary>
               [取得/設定] 下邊界%數
@@ -1934,7 +1982,17 @@
         </member>
         <member name="P:PowerLanguage.ChartSetting.IsSubChart">
             <summary>
-              [取得/設定] 是否為副圖(如果不是副圖則就是隱藏)
+              [取得/設定] 是否為副圖
+            </summary>
+        </member>
+        <member name="P:PowerLanguage.ChartSetting.LayerIndex">
+            <summary>
+              [取得/設定] 圖層索引(IsSubChart=false OR LayerIndex=-1 [隱藏])
+            </summary>
+        </member>
+        <member name="P:PowerLanguage.ChartSetting.LegendColor">
+            <summary>
+              [取得/設定] Legend 圖例顏色
             </summary>
         </member>
         <member name="P:PowerLanguage.ChartSetting.PenStyles">

@@ -34,56 +34,55 @@ namespace Zeghs.IO {
 		internal void Load(DateTime date) {
 			if (logger.IsInfoEnabled) logger.InfoFormat("讀取 {0} 股票資料並轉換...", date.ToString("yyyy-MM-dd"));
 			if (logger.IsInfoEnabled) logger.InfoFormat("{0} 下載股票即時資料中...", date.ToString("yyyy-MM-dd"));
-			try {
-				FtpWebRequest request = WebRequest.Create(string.Format("ftp://202.39.79.149/%2f/{0}/{1}/{2}.exe", date.Year, date.Month.ToString("00"), date.Day.ToString("00"))) as FtpWebRequest;
-				request.Method = WebRequestMethods.Ftp.DownloadFile;
-				request.Credentials = new NetworkCredential("stock", "stock123");
+			if (GetFiles(date)) {
+				string[] sFiles = File.ReadAllLines("mitake\\files.txt");
+				foreach (string sFile in sFiles) {
+					int iIndex = sFile.LastIndexOf(" ");
+					System.Console.WriteLine();
 
-				FtpWebResponse response = request.GetResponse() as FtpWebResponse;
-				Stream responseStream = response.GetResponseStream();
+					string sFilename = sFile.Substring(iIndex + 1);
+					System.Console.WriteLine("Searching... {0}", sFilename);
 
-				int iSize = 0;
-				long lTotals = 0;
-				byte[] bBuffer = new byte[1048576];
-				using (FileStream cStream = new FileStream("mitake\\data.exe", FileMode.Create, FileAccess.Write, FileShare.Read)) {
-					while ((iSize = responseStream.Read(bBuffer, 0, bBuffer.Length)) > 0) {
-						cStream.Write(bBuffer, 0, iSize);
+					try {
+						FtpWebRequest request = WebRequest.Create(string.Format("ftp://202.39.79.145/{0}/{1}/{2}/{3}", date.Year, date.Month.ToString("00"), date.Day.ToString("00"), sFilename)) as FtpWebRequest;
+						request.Method = WebRequestMethods.Ftp.DownloadFile;
+						request.Credentials = new NetworkCredential("zentc", "3979076");
 
-						lTotals += iSize;
-						System.Console.Write("Downloading... {0} kb", (lTotals / 1000).ToString("N0"));
-						System.Console.CursorLeft = 0;
+						FtpWebResponse response = request.GetResponse() as FtpWebResponse;
+						Stream responseStream = response.GetResponseStream();
+
+						int iSize = 0;
+						long lTotals = 0;
+						byte[] bBuffer = new byte[1048576];
+						using (FileStream cStream = new FileStream("mitake\\" + sFilename, FileMode.Create, FileAccess.Write, FileShare.Read)) {
+							while ((iSize = responseStream.Read(bBuffer, 0, bBuffer.Length)) > 0) {
+								cStream.Write(bBuffer, 0, iSize);
+
+								lTotals += iSize;
+								System.Console.Write("Downloading... {0} kb", (lTotals / 1000).ToString("N0"));
+								System.Console.CursorLeft = 0;
+							}
+						}
+
+						responseStream.Close();
+						response.Close();
+					} catch {
+						System.Console.WriteLine("無 {0} 股票即時資料...", sFilename);
 					}
 				}
-
-				responseStream.Close();
-				response.Close();
-			} catch {
-				System.Console.WriteLine("無 {0} 股票即時資料...", date.ToString("yyyy-MM-dd"));
+			} else {
 				return;
 			}
-			
+
 			try {
-				if (logger.IsInfoEnabled) logger.InfoFormat("{0} 股票資料解壓縮中...", date.ToString("yyyy-MM-dd"));
-
-				ProcessStartInfo cProcessInfo = new ProcessStartInfo();
-				cProcessInfo.FileName = Zeghs.Settings.GlobalSettings.Settings.SevenZipPath + "7z.exe";
-				cProcessInfo.Arguments = "x \"mitake\\data.exe\" -o\"mitake\"";
-				cProcessInfo.WindowStyle = ProcessWindowStyle.Hidden;
-				Process cProcess = Process.Start(cProcessInfo);
-				cProcess.WaitForExit();
-
-				File.Delete("mitake\\data.exe");
-
-				string sPath = string.Format("mitake\\{0}", date.Day.ToString("00"));
-
 				StockDecoder.Reset(date);  //重置股票解碼器(並設定要解碼的資料日期, 解碼器會以當天為開盤日做解碼動作)
 
 				__cSymbolBuffer.Length = 0;
 
 				if (logger.IsInfoEnabled) logger.InfoFormat("讀取 {0} 股票基本資料中...", date.ToString("yyyy-MM-dd"));
-				ConvertSymbol(sPath + "\\Load.0");  //讀取基本資料
+				ConvertSymbol("mitake\\Load.0");  //讀取基本資料
 
-				string[] sFiles = Directory.GetFiles(sPath);
+				string[] sFiles = Directory.GetFiles("mitake\\");
 				foreach (string sFile in sFiles) {
 					string sName = sFile.Substring(sFile.LastIndexOf("\\") + 1);
 					if (sName[0] < 'A' || sName.IndexOf("Load") > -1) {
@@ -96,12 +95,12 @@ namespace Zeghs.IO {
 					}
 				}
 
-				CreateFutures(date);
-				CreateIndexs(date);
+				//CreateFutures(date);
+				//CreateIndexs(date);
 				CreateIndexOptions(date);
 				//CreateSpreads(date);
 				//CreateStocks(date);
-				
+
 				if (logger.IsInfoEnabled) logger.InfoFormat("{0} 股票資料轉換完畢...", date.ToString("yyyy-MM-dd"));
 			} catch (Exception __errExcep) {
 				File.AppendAllText("lose.txt", string.Format("{0}\r\n", date.ToString("yyyy-MM-dd")), System.Text.Encoding.UTF8);
@@ -131,6 +130,37 @@ namespace Zeghs.IO {
 				}
 				Decode(file);
 			}
+		}
+
+		private bool GetFiles(DateTime date) {
+			try {
+				FtpWebRequest request = WebRequest.Create(string.Format("ftp://202.39.79.145/{0}/{1}/{2}/", date.Year, date.Month.ToString("00"), date.Day.ToString("00"))) as FtpWebRequest;
+				request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
+				request.Credentials = new NetworkCredential("zentc", "3979076");
+
+				FtpWebResponse response = request.GetResponse() as FtpWebResponse;
+				Stream responseStream = response.GetResponseStream();
+
+				int iSize = 0;
+				long lTotals = 0;
+				byte[] bBuffer = new byte[1048576];
+				using (FileStream cStream = new FileStream("mitake\\files.txt", FileMode.Create, FileAccess.Write, FileShare.Read)) {
+					while ((iSize = responseStream.Read(bBuffer, 0, bBuffer.Length)) > 0) {
+						cStream.Write(bBuffer, 0, iSize);
+
+						lTotals += iSize;
+						System.Console.Write("Get ListDirectoryDetails data... {0} kb", (lTotals / 1000).ToString("N0"));
+						System.Console.CursorLeft = 0;
+					}
+				}
+
+				responseStream.Close();
+				response.Close();
+			} catch {
+				System.Console.WriteLine("無 {0} 股票即時資料檔案清單...", date.ToString("yyyy-MM-dd"));
+				return false;
+			}
+			return true;
 		}
 
 		private void StockDecoder_onStock(object sender, Mitake.Events.StockEvent e) {
