@@ -232,7 +232,7 @@
               蠟燭線圖表
             </summary>
         </member>
-        <member name="F:PowerLanguage.EChartType.CloseLine">
+        <member name="F:PowerLanguage.EChartType.ClosingLine">
             <summary>
               收盤線圖表
             </summary>
@@ -240,6 +240,11 @@
         <member name="F:PowerLanguage.EChartType.TextObject">
             <summary>
               文字物件
+            </summary>
+        </member>
+        <member name="F:PowerLanguage.EChartType.TradeObject">
+            <summary>
+              交易物件
             </summary>
         </member>
         <member name="T:PowerLanguage.EResolution">
@@ -611,36 +616,6 @@
               使用者指定 lots 單位
             </summary>
         </member>
-        <member name="T:Zeghs.Settings.PathSetting">
-            <summary>
-              預設系統目錄路徑設定類別
-            </summary>
-        </member>
-        <member name="P:Zeghs.Settings.PathSetting.CachePath">
-            <summary>
-              [取得/設定] Cache 路徑
-            </summary>
-        </member>
-        <member name="P:Zeghs.Settings.PathSetting.DatabasePath">
-            <summary>
-              [取得/設定] Database 路徑
-            </summary>
-        </member>
-        <member name="P:Zeghs.Settings.PathSetting.LogPath">
-            <summary>
-              [取得/設定] Log 路徑
-            </summary>
-        </member>
-        <member name="P:Zeghs.Settings.PathSetting.ProfilePath">
-            <summary>
-              [取得/設定] Database 路徑
-            </summary>
-        </member>
-        <member name="P:Zeghs.Settings.PathSetting.TrackerPath">
-            <summary>
-              [取得/設定] Order 與 Position 的追蹤路徑
-            </summary>
-        </member>
         <member name="T:PowerLanguage.ISeriesSymbolDataRand">
             <summary>
               序列資訊延伸介面
@@ -709,66 +684,6 @@
         <member name="F:PowerLanguage.EAverageMode.WMA">
             <summary>
               加權移動平均模式
-            </summary>
-        </member>
-        <member name="T:Zeghs.Settings.ChartProperty">
-            <summary>
-              圖表屬性類別
-            </summary>
-        </member>
-        <member name="P:Zeghs.Settings.ChartProperty.AxisColor">
-            <summary>
-              [取得/設定] Axis 顏色
-            </summary>
-        </member>
-        <member name="P:Zeghs.Settings.ChartProperty.AxisFont">
-            <summary>
-              [取得/設定] 座標軸預設字型
-            </summary>
-        </member>
-        <member name="P:Zeghs.Settings.ChartProperty.BackgroundColor">
-            <summary>
-              [取得/設定] 背景顏色
-            </summary>
-        </member>
-        <member name="P:Zeghs.Settings.ChartProperty.ChartSettings">
-            <summary>
-              [取得/設定] Chart 設定值
-            </summary>
-        </member>
-        <member name="P:Zeghs.Settings.ChartProperty.DrawingSource">
-            <summary>
-              [取得/設定] 繪製來源狀態
-            </summary>
-        </member>
-        <member name="P:Zeghs.Settings.ChartProperty.ForeColor">
-            <summary>
-              [取得/設定] 前景顏色
-            </summary>
-        </member>
-        <member name="P:Zeghs.Settings.ChartProperty.GridColor">
-            <summary>
-              [取得/設定] 網格顏色
-            </summary>
-        </member>
-        <member name="P:Zeghs.Settings.ChartProperty.IsShowGrid">
-            <summary>
-              [取得/設定] 是否顯示網格
-            </summary>
-        </member>
-        <member name="P:Zeghs.Settings.ChartProperty.LegendFont">
-            <summary>
-              [取得/設定] 圖例標籤預設字型
-            </summary>
-        </member>
-        <member name="P:Zeghs.Settings.ChartProperty.TextFont">
-            <summary>
-              [取得/設定] 使用者輸入文字預設字型
-            </summary>
-        </member>
-        <member name="P:Zeghs.Settings.ChartProperty.TitleFont">
-            <summary>
-              [取得/設定] Title 預設字型(標頭顯示商品名稱資訊)
             </summary>
         </member>
         <member name="T:PowerLanguage.SeriesAbstract`1">
@@ -1806,28 +1721,6 @@
               [取得] 規則類別
             </summary>
         </member>
-        <member name="T:PowerLanguage.GlobalSettings">
-            <summary>
-              全域設定類別
-            </summary>
-        </member>
-        <member name="M:PowerLanguage.GlobalSettings.Load(System.String)">
-            <summary>
-              讀取全域設定
-            </summary>
-            <param name="filename">設定檔名稱</param>
-        </member>
-        <member name="M:PowerLanguage.GlobalSettings.Save(System.String)">
-            <summary>
-              儲存全域設定
-            </summary>
-            <param name="filename">設定檔名稱</param>
-        </member>
-        <member name="P:PowerLanguage.GlobalSettings.Paths">
-            <summary>
-              [取得] 預設系統目錄路徑設定值
-            </summary>
-        </member>
         <member name="T:PowerLanguage.Order">
             <summary>
               下單參數類別
@@ -1982,12 +1875,12 @@
         </member>
         <member name="P:PowerLanguage.ChartSetting.IsSubChart">
             <summary>
-              [取得/設定] 是否為副圖
+              [取得/設定] 是否為副圖(true=副圖, false=隱藏)
             </summary>
         </member>
         <member name="P:PowerLanguage.ChartSetting.LayerIndex">
             <summary>
-              [取得/設定] 圖層索引(IsSubChart=false OR LayerIndex=-1 [隱藏])
+              [取得/設定] 圖層索引
             </summary>
         </member>
         <member name="P:PowerLanguage.ChartSetting.LegendColor">
@@ -2365,16 +2258,17 @@
             </summary>
             <param name="point">文字繪圖物件的座標位置</param>
             <param name="text">繪圖文字內容</param>
-            <param name="onSameSubchart">是否在同一個副圖中</param>
+            <param name="absolutePosition">是否座標位置為螢幕座標而非價格與時間軸座標</param>
             <returns>返回值: ITextObject 介面</returns>
         </member>
-        <member name="M:PowerLanguage.ITextContainer.Create(PowerLanguage.ChartPoint,System.String,System.Int32)">
+        <member name="M:PowerLanguage.ITextContainer.Create(PowerLanguage.ChartPoint,System.String,System.Int32,System.Boolean)">
             <summary>
               建立文字繪圖物件
             </summary>
             <param name="point">文字繪圖物件的座標位置</param>
             <param name="text">繪圖文字內容</param>
             <param name="dataStream">資料串流編號</param>
+            <param name="absolutePosition">是否座標位置為螢幕座標而非價格與時間軸座標</param>
             <returns>返回值: ITextObject 介面</returns>
         </member>
         <member name="M:PowerLanguage.ITextContainer.GetTextObjects(PowerLanguage.EDrawingSource,System.Int32,System.Int32)">
