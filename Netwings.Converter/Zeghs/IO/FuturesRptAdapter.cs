@@ -33,6 +33,7 @@ namespace Zeghs.IO {
 			bool bConvert = false;
 			string sEDate = string.Empty;
 			string sOSymbolId = string.Empty;
+			string sDate = date.ToString("yyyyMMdd");
 			SeriesSymbolData cMSeries = null, cDSeries = null;
 
 			if (logger.IsInfoEnabled) logger.Info("[Convert] 開始轉換期交所的期貨資訊...");
@@ -41,6 +42,11 @@ namespace Zeghs.IO {
 			for (int i = 1; i < iLength; i++) {
 				string[] sItems = sData[i].Split(',');
 				if (sItems.Length == 9) {
+					string sFutureDate = sItems[0].Trim();
+					if (!sFutureDate.Equals(sDate)) {  //檢查日期是否為欲轉換的日期
+						continue;
+					}
+
 					string sSymbolId = sItems[1].Trim();
 					if (!sSymbolId.Equals(sOSymbolId)) {
 						if (bConvert) {

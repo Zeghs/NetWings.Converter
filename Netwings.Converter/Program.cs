@@ -23,7 +23,7 @@ namespace Converter {
 			XmlConfigurator.ConfigureAndWatch(new System.IO.FileInfo("log4net_config.xml"));
 
 			ServicePointManager.DefaultConnectionLimit = 1024;
-			
+
 			ProductManager.Load("exchanges");
 			QuoteManager.Manager.Refresh("plugins\\quotes");
 
@@ -45,7 +45,7 @@ namespace Converter {
 				FuturesRptAdapter.Convert(DateTime.Now);
 			}
 
-			//DumpDataUtil.Load("TXW0C8250.tw", false, new DateTime(2012, 1, 2, 8, 45, 0), new DateTime(2014, 12, 31, 13, 45, 0));
+			//DumpDataUtil.Load("TXF0.tw", true, new DateTime(2017, 12, 22, 8, 45, 0), new DateTime(2017, 12, 26, 13, 45, 0));
 			//DumpDataUtil.Save("TXF0.tw", true, "abc.txt", new DateTime(2013,11,20,8,45,0));
 
 			//FuturesCsvAdapter.Convert();  //轉換CSV使用

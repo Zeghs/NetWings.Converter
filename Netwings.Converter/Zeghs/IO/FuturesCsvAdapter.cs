@@ -40,7 +40,7 @@ namespace Zeghs.IO {
 
 			string[] sItems = sData[0].Split(',');
 			string sSymbolId = null;
-			bConvert = cTargetSymbols.TryGetValue(sItems[0], out sSymbolId);
+			bConvert = cTargetSymbols.TryGetValue(Path.GetFileNameWithoutExtension(csvFile), out sSymbolId);
 
 			if (bConvert) {
 				int iLength = sData.Length;
@@ -50,12 +50,12 @@ namespace Zeghs.IO {
 
 				for (int i = iLength - 1; i >=0; i--) {
 					sItems = sData[i].Split(',');
-					DateTime cTime = DateTime.Parse(string.Format("{0} {1}", sItems[2], sItems[3]));
-					double dOpen = double.Parse(sItems[4]);
-					double dHigh = double.Parse(sItems[5]);
-					double dLow = double.Parse(sItems[6]);
-					double dClose = double.Parse(sItems[7]);
-					double dVolume = double.Parse(sItems[8]);
+					DateTime cTime = DateTime.Parse(sItems[0]);
+					double dOpen = double.Parse(sItems[1]);
+					double dHigh = double.Parse(sItems[2]);
+					double dLow = double.Parse(sItems[3]);
+					double dClose = double.Parse(sItems[4]);
+					double dVolume = double.Parse(sItems[5]);
 					cMSeries.AddSeries(cTime, dOpen, dHigh, dLow, dClose, dVolume, false);
 				}
 
