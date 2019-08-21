@@ -117,9 +117,11 @@ namespace Zeghs.IO {
 
 		private static string[] LoadRPT(DateTime date, bool isDownload = true) {
 			string sDaily = string.Format("Daily_{0}_{1}_{2}", date.Year, date.Month.ToString("0#"), date.Day.ToString("0#"));
+
 			if (isDownload) {
 				using (WebClient cClient = new WebClient()) {
-					string sUrl = string.Format("http://www.taifex.com.tw/DailyDownload/DailyDownload/{0}.zip", sDaily);
+					string sUrl = string.Format("http://www.taifex.com.tw/file/taifex/Dailydownload/Dailydownload/{0}.zip", sDaily);
+
 					try {
 						cClient.DownloadFile(sUrl, sDaily + ".zip");
 					} catch (Exception __errExcep) {
