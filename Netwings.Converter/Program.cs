@@ -80,6 +80,9 @@ namespace Converter {
 				case 2:
 					RunCommand_02();
 					break;
+				case 3:
+					RunCommand_03();
+					break;
 			}
 		}
 
@@ -98,10 +101,17 @@ namespace Converter {
 			FuturesRptAdapter.Convert(DateTime.Now, false);
 		}
 
+		static void RunCommand_03() {
+			Console.Write("請輸入指定日期(YYYY-MM-DD):");
+			string sDate = Console.ReadLine();
+			FuturesRptAdapter.Convert(DateTime.Parse(sDate), true);
+		}
+
 		static int PrintMenu() {
 			Console.WriteLine("== [管理者功能選單]");
 			Console.WriteLine("1. 修改期權商品到期日為今天");
 			Console.WriteLine("2. 匯入今日RPT壓縮檔並轉檔資料");
+			Console.WriteLine("3. 輸入指定日下載壓縮檔並轉檔資料");
 			Console.WriteLine();
 			Console.Write("請輸入選單號碼:");
 			string sNumber = Console.ReadLine();
