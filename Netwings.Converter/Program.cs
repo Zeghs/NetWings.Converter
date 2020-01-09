@@ -35,11 +35,13 @@ namespace Converter {
 			
 			Zeghs.Settings.GlobalSettings.Load();
 
+			/*
 			//轉換三竹資訊源即時資料
 			MitakeSourceAdapter cAdapter = new MitakeSourceAdapter();
 			cAdapter.Load(DateTime.Today);
-			
-			/* 轉換期交所指數期貨 RPT 資料
+			// */
+
+			//* 轉換期交所指數期貨 RPT 資料
 			if (args.Length > 0 && args[0].Equals("/admin")) {
 				int iCommand = PrintMenu();
 				if (iCommand > 0) {

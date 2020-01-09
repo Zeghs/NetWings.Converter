@@ -212,12 +212,15 @@ namespace Zeghs.Data {
 			double dVolume = tick.Volume;
 			if (dVolume > __dOVolume) {
 				double dPrice = tick.Price;
-				DateTime cBaseTime = tick.Time;
-				if (__cTimeQueue != null && __cTimeQueue.Count > 0) {
-					bool bNewBars = Resolution.GetNearestPeriod(__cTimeQueue, ref cBaseTime);
-					MergeSeries(this, cBaseTime, tick.Time, dPrice, dPrice, dPrice, dPrice, tick.Single, bNewBars, true);
-				} else {
-					MergeSeries(this, cBaseTime, tick.Time, dPrice, dPrice, dPrice, dPrice, tick.Single, false, true);
+				double dSingle = dVolume - __dOVolume;  //重新計算準確的單量(即時系統送來的單量並不準確, 所以以總量為標準依據)
+				if (dPrice > 0 && dSingle > 0) {
+					DateTime cBaseTime = tick.Time;
+					if (__cTimeQueue != null) {
+						bool bNewBars = Resolution.GetNearestPeriod(__cTimeQueue, ref cBaseTime);
+						MergeSeries(this, cBaseTime, tick.Time, dPrice, dPrice, dPrice, dPrice, dSingle, bNewBars, true);
+					} else {
+						MergeSeries(this, cBaseTime, tick.Time, dPrice, dPrice, dPrice, dPrice, dSingle, false, true);
+					}
 				}
 				
 				__cUpdateTime = DateTime.UtcNow.AddHours(__cSettings.TimeZone);
