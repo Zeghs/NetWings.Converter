@@ -12,6 +12,7 @@ using Zeghs.Data;
 using Zeghs.Utils;
 using Zeghs.Products;
 using Zeghs.Managers;
+using Zeghs.Settings;
 
 namespace Zeghs.IO {
 	internal sealed class MitakeSourceAdapter : IDisposable {
@@ -35,6 +36,10 @@ namespace Zeghs.IO {
 			if (logger.IsInfoEnabled) logger.InfoFormat("讀取 {0} 股票資料並轉換...", date.ToString("yyyy-MM-dd"));
 			if (logger.IsInfoEnabled) logger.InfoFormat("{0} 下載股票即時資料中...", date.ToString("yyyy-MM-dd"));
 			if (GetFiles(date)) {
+				if (logger.IsInfoEnabled) logger.InfoFormat("{0} 解壓縮即時資料中...", date.ToString("yyyy-MM-dd"));
+				Compression.ExtractFrom7Zip("mitake\\data.rar", "mitake");
+
+				/*
 				string[] sFiles = File.ReadAllLines("mitake\\files.txt");
 				foreach (string sFile in sFiles) {
 					int iIndex = sFile.LastIndexOf(" ");
@@ -44,7 +49,7 @@ namespace Zeghs.IO {
 					System.Console.WriteLine("Searching... {0}", sFilename);
 
 					try {
-						FtpWebRequest request = WebRequest.Create(string.Format("ftp://202.39.79.145/{0}/{1}/{2}/{3}", date.Year, date.Month.ToString("00"), date.Day.ToString("00"), sFilename)) as FtpWebRequest;
+						FtpWebRequest request = WebRequest.Create(string.Format("ftp://202.39.79.145/{0}/{1}", date.Day.ToString("00"), sFilename)) as FtpWebRequest;
 						request.Method = WebRequestMethods.Ftp.DownloadFile;
 						request.Credentials = new NetworkCredential("zentc", "3979076");
 
@@ -69,7 +74,7 @@ namespace Zeghs.IO {
 					} catch {
 						System.Console.WriteLine("無 {0} 股票即時資料...", sFilename);
 					}
-				}
+				}*/
 			} else {
 				return;
 			}
@@ -80,9 +85,9 @@ namespace Zeghs.IO {
 				__cSymbolBuffer.Length = 0;
 
 				if (logger.IsInfoEnabled) logger.InfoFormat("讀取 {0} 股票基本資料中...", date.ToString("yyyy-MM-dd"));
-				ConvertSymbol("mitake\\Load.0");  //讀取基本資料
+				ConvertSymbol(string.Format("mitake\\{0}\\Load.0", date.Day.ToString("0#")));  //讀取基本資料
 
-				string[] sFiles = Directory.GetFiles("mitake\\");
+				string[] sFiles = Directory.GetFiles(string.Format("mitake\\{0}\\", date.Day.ToString("0#")));
 				foreach (string sFile in sFiles) {
 					string sName = sFile.Substring(sFile.LastIndexOf("\\") + 1);
 					if (sName[0] < 'A' || sName.IndexOf("Load") > -1) {
@@ -90,16 +95,16 @@ namespace Zeghs.IO {
 						System.Console.CursorLeft = 0;
 
 						Decode(sFile);
-					} else {
-						File.Delete(sFile);
 					}
+
+					File.Delete(sFile);
 				}
 
-				//CreateFutures(date);
-				//CreateIndexs(date);
+				CreateFutures(date);
+				CreateIndexs(date);
 				CreateIndexOptions(date);
-				//CreateSpreads(date);
-				//CreateStocks(date);
+				CreateSpreads(date);
+				CreateStocks(date);
 
 				if (logger.IsInfoEnabled) logger.InfoFormat("{0} 股票資料轉換完畢...", date.ToString("yyyy-MM-dd"));
 			} catch (Exception __errExcep) {
@@ -134,8 +139,8 @@ namespace Zeghs.IO {
 
 		private bool GetFiles(DateTime date) {
 			try {
-				FtpWebRequest request = WebRequest.Create(string.Format("ftp://202.39.79.145/{0}/{1}/{2}/", date.Year, date.Month.ToString("00"), date.Day.ToString("00"))) as FtpWebRequest;
-				request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
+				FtpWebRequest request = WebRequest.Create(string.Format("ftp://202.39.79.145/{0}.rar", date.Day.ToString("00"))) as FtpWebRequest;
+				request.Method = WebRequestMethods.Ftp.DownloadFile;
 				request.Credentials = new NetworkCredential("zentc", "3979076");
 
 				FtpWebResponse response = request.GetResponse() as FtpWebResponse;
@@ -144,12 +149,12 @@ namespace Zeghs.IO {
 				int iSize = 0;
 				long lTotals = 0;
 				byte[] bBuffer = new byte[1048576];
-				using (FileStream cStream = new FileStream("mitake\\files.txt", FileMode.Create, FileAccess.Write, FileShare.Read)) {
+				using (FileStream cStream = new FileStream("mitake\\data.rar", FileMode.Create, FileAccess.Write, FileShare.Read)) {
 					while ((iSize = responseStream.Read(bBuffer, 0, bBuffer.Length)) > 0) {
 						cStream.Write(bBuffer, 0, iSize);
 
 						lTotals += iSize;
-						System.Console.Write("Get ListDirectoryDetails data... {0} kb", (lTotals / 1000).ToString("N0"));
+						System.Console.Write("Get real data... {0} kb", (lTotals / 1000).ToString("N0"));
 						System.Console.CursorLeft = 0;
 					}
 				}

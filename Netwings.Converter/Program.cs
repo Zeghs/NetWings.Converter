@@ -35,6 +35,11 @@ namespace Converter {
 			
 			Zeghs.Settings.GlobalSettings.Load();
 
+			//轉換三竹資訊源即時資料
+			MitakeSourceAdapter cAdapter = new MitakeSourceAdapter();
+			cAdapter.Load(DateTime.Today);
+			
+			/* 轉換期交所指數期貨 RPT 資料
 			if (args.Length > 0 && args[0].Equals("/admin")) {
 				int iCommand = PrintMenu();
 				if (iCommand > 0) {
@@ -44,6 +49,7 @@ namespace Converter {
 				bool bEvent = __cManualEvent.WaitOne(60000);
 				FuturesRptAdapter.Convert(DateTime.Now);
 			}
+			// */ 
 
 			//DumpDataUtil.Load("TXF0.tw", true, new DateTime(2017, 12, 22, 8, 45, 0), new DateTime(2017, 12, 26, 13, 45, 0));
 			//DumpDataUtil.Save("TXF0.tw", true, "abc.txt", new DateTime(2013,11,20,8,45,0));
