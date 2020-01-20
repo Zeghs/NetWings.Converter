@@ -116,7 +116,8 @@ namespace Zeghs.Data {
 
 		internal DateTime LastBarTime {
 			get {
-				return __cTimes[Indexer.RealtimeIndex];
+				int iIndex = Indexer.RealtimeIndex;
+				return __cTimes[(iIndex < 0) ? 0 : iIndex];
 			}
 		}
 
@@ -216,7 +217,7 @@ namespace Zeghs.Data {
 				if (dPrice > 0 && dSingle > 0) {
 					DateTime cBaseTime = tick.Time;
 					if (__cTimeQueue != null) {
-						bool bNewBars = Resolution.GetNearestPeriod(__cTimeQueue, ref cBaseTime);
+						bool bNewBars = Resolution.GetNearestPeriod(__cTimeQueue, this.LastBarTime, ref cBaseTime);
 						MergeSeries(this, cBaseTime, tick.Time, dPrice, dPrice, dPrice, dPrice, dSingle, bNewBars, true);
 					} else {
 						MergeSeries(this, cBaseTime, tick.Time, dPrice, dPrice, dPrice, dPrice, dSingle, false, true);

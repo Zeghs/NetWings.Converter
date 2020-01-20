@@ -35,13 +35,20 @@ namespace Converter {
 			
 			Zeghs.Settings.GlobalSettings.Load();
 
-			/*
+			//*
 			//轉換三竹資訊源即時資料
-			MitakeSourceAdapter cAdapter = new MitakeSourceAdapter();
-			cAdapter.Load(DateTime.Today);
+			if (args.Length > 0 && args[0].Equals("/admin")) {
+				int iCommand = PrintMenu();
+				if (iCommand > 0) {
+					ExcuteCommand(iCommand);
+				}
+			} else {
+				MitakeSourceAdapter cAdapter = new MitakeSourceAdapter();
+				cAdapter.Load(DateTime.Today);
+			}
 			// */
 
-			//* 轉換期交所指數期貨 RPT 資料
+			/* 轉換期交所指數期貨 RPT 資料
 			if (args.Length > 0 && args[0].Equals("/admin")) {
 				int iCommand = PrintMenu();
 				if (iCommand > 0) {
@@ -91,6 +98,9 @@ namespace Converter {
 				case 3:
 					RunCommand_03();
 					break;
+				case 4:
+					RunCommand_04();
+					break;
 			}
 		}
 
@@ -115,11 +125,20 @@ namespace Converter {
 			FuturesRptAdapter.Convert(DateTime.Parse(sDate), true);
 		}
 
+		static void RunCommand_04() {
+			Console.Write("請輸入指定日期(YYYY-MM-DD):");
+			string sDate = Console.ReadLine();
+
+			MitakeSourceAdapter cAdapter = new MitakeSourceAdapter();
+			cAdapter.Load(DateTime.Parse(sDate));
+		}
+
 		static int PrintMenu() {
 			Console.WriteLine("== [管理者功能選單]");
 			Console.WriteLine("1. 修改期權商品到期日為今天");
 			Console.WriteLine("2. 匯入今日RPT壓縮檔並轉檔資料");
 			Console.WriteLine("3. 輸入指定日下載壓縮檔並轉檔資料");
+			Console.WriteLine("4. 輸入指定日下載 Mitake 壓縮檔並轉檔資料");
 			Console.WriteLine();
 			Console.Write("請輸入選單號碼:");
 			string sNumber = Console.ReadLine();
