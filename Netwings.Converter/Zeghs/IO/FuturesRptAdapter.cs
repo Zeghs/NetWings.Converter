@@ -119,6 +119,7 @@ namespace Zeghs.IO {
 			string sDaily = string.Format("Daily_{0}_{1}_{2}", date.Year, date.Month.ToString("0#"), date.Day.ToString("0#"));
 
 			if (isDownload) {
+				System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls;
 				using (WebClient cClient = new WebClient()) {
 					string sUrl = string.Format("http://www.taifex.com.tw/file/taifex/Dailydownload/Dailydownload/{0}.zip", sDaily);
 
